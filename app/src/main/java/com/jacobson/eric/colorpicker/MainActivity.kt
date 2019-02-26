@@ -1,22 +1,26 @@
 package com.jacobson.eric.colorpicker
 
 import android.content.Context
-import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.SeekBar
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import org.jetbrains.anko.selector
 import java.io.OutputStreamWriter
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
     var rgbColors:IntArray = intArrayOf(0, 0, 0)
+    var savedColors = arrayListOf<CharSequence>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +45,12 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
-            //TODO: Set up the actions when methods are implemented
             R.id.action_save -> {
                 saveColor()
                 return true
             }
             R.id.action_recall -> {
+                showColorsList()
                 return true
             }
             else -> super.onOptionsItemSelected(item)
@@ -72,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun saveColor(){
-        val file = openFileOutput("dataStorage.txt", Context.MODE_APPEND)
+        val file = openFileOutput("savedColorData.txt", Context.MODE_APPEND)
         val fileOut = OutputStreamWriter(file)
         var color = EditText(this)
         val alert = AlertDialog.Builder(this@MainActivity).create()
@@ -86,5 +90,41 @@ class MainActivity : AppCompatActivity() {
             fileOut.close()
         })
         alert.show()
+    }
+
+    private fun loadColors(){
+        try {
+            val fileIn = openFileInput("savedColorData.txt")
+            val reader = fileIn.bufferedReader()
+            savedColors.clear()
+            reader.forEachLine {
+                savedColors.add(it)
+            }
+        } catch (e:Exception){
+            Log.i("Exception: ", e.toString())
+        }
+    }
+
+    private fun showColorsList(){
+        loadColors()
+        selector("Saved Colors", savedColors, {dialogInterface, i ->
+            selectColorFromList(i)
+            val colorName = savedColors[i].split(" ")
+            Toast.makeText(applicationContext, "${colorName} selected!", Toast.LENGTH_SHORT).show()
+        })
+    }
+
+    private fun selectColorFromList(index: Int){
+        val color = savedColors[index].split(" ")
+        val red:Int = color[0].toInt()
+        val green:Int = color[1].toInt()
+        val blue:Int = color[2].toInt()
+        rgbColors[0] = red
+        rgbColors[1] = green
+        rgbColors[2] = blue
+        redSeekBar.progress = red
+        greenSeekBar.progress = green
+        blueSeekBar.progress = blue
+        seekBarProgress()
     }
 }
