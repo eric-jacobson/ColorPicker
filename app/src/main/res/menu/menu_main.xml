@@ -2,8 +2,19 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.jacobson.eric.colorpicker.MainActivity">
+
+    <item android:id="@+id/action_save"
+          android:title="@string/action_save"
+          android:orderInCategory="100"
+          app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_recall"
+          android:title="@string/action_recall"
+          android:orderInCategory="101"
+          app:showAsAction="ifRoom"/>
+
     <item android:id="@+id/action_settings"
           android:title="@string/action_settings"
-          android:orderInCategory="100"
+          android:orderInCategory="102"
           app:showAsAction="never"/>
 </menu>

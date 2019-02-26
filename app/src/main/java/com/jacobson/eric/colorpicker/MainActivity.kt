@@ -2,69 +2,26 @@ package com.jacobson.eric.colorpicker
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SeekBar
-import android.widget.TextView
-
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    var rgbColors:IntArray = intArrayOf(0, 0, 0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val seekBarRed = findViewById<SeekBar>(R.id.seekBar_red)
-        val seekBarGreen = findViewById<SeekBar>(R.id.seekBar_green)
-        val seekBarBlue = findViewById<SeekBar>(R.id.seekBar_blue)
-
-        var textViewValRed = findViewById<TextView>(R.id.textView_redVal)
-        var textViewValGreen = findViewById<TextView>(R.id.textView_greenVal)
-        var textViewValBlue = findViewById<TextView>(R.id.textView_blueVal)
-
-        var red = 0
-        var green = 0
-        var blue = 0
-
-        textView_colorFill.setBackgroundColor(Color.rgb(red, green, blue))
-        textViewValRed.text = "$red"
-        textViewValGreen.text = "$green"
-        textViewValBlue.text = "$blue"
-
-
-        seekBarRed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                red = progress
-                textView_colorFill.setBackgroundColor(Color.rgb(red, green, blue))
-                textViewValRed.text = "$progress"
-            }
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
-
-        seekBarGreen.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                green = progress
-                textView_colorFill.setBackgroundColor(Color.rgb(red, green, blue))
-                textViewValGreen.text = "$progress"
-            }
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
-
-        seekBarBlue.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                blue = progress
-                textView_colorFill.setBackgroundColor(Color.rgb(red, green, blue))
-                textViewValBlue.text = "$progress"
-            }
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
+        seekBarProgress()
+        setUpSeekBarChangeListener(redSeekBar, 0)
+        setUpSeekBarChangeListener(greenSeekBar, 1)
+        setUpSeekBarChangeListener(blueSeekBar, 2)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -79,7 +36,32 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
+            //TODO: Set up the actions when methods are implemented
+            R.id.action_save -> {
+                return true
+            }
+            R.id.action_recall -> {
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun setUpSeekBarChangeListener(seekBar: SeekBar, index:Int){
+        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                rgbColors[index] = progress
+                seekBarProgress()
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+    }
+
+    private fun seekBarProgress(){
+        redProgressText.text = rgbColors[0].toString()
+        greenProgressText.text = rgbColors[1].toString()
+        blueProgressText.text = rgbColors[2].toString()
+        textView_colorFill.setBackgroundColor(Color.rgb(rgbColors[0], rgbColors[1], rgbColors[2]))
     }
 }

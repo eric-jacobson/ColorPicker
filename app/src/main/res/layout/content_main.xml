@@ -35,18 +35,18 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView_red"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/seekBar_red" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/redSeekBar" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"/>
     <SeekBar
             android:layout_width="325dp"
             android:layout_height="wrap_content"
-            android:id="@+id/seekBar_red"
+            android:id="@+id/redSeekBar"
             android:max="255"
             android:layout_marginBottom="240dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/textView_redVal" android:layout_marginEnd="8dp"/>
+            app:layout_constraintEnd_toStartOf="@+id/redProgressText" android:layout_marginEnd="8dp"/>
     <TextView
             android:text="@string/label_green"
             android:layout_width="wrap_content"
@@ -54,50 +54,50 @@
             android:id="@+id/textView_green" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintHorizontal_bias="0.498"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/seekBar_green"/>
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/greenSeekBar"/>
     <SeekBar
             android:layout_width="325dp"
             android:layout_height="wrap_content"
-            android:id="@+id/seekBar_green"
+            android:id="@+id/greenSeekBar"
             android:max="255"
             android:layout_marginBottom="160dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/textView_greenVal" android:layout_marginEnd="8dp"/>
+            app:layout_constraintEnd_toStartOf="@+id/greenProgressText" android:layout_marginEnd="8dp"/>
     <TextView
             android:text="@string/label_blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView_blue" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/seekBar_blue"/>
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/blueSeekBar"/>
     <SeekBar
             android:layout_width="325dp"
             android:layout_height="wrap_content"
-            android:id="@+id/seekBar_blue"
+            android:id="@+id/blueSeekBar"
             android:max="255"
             android:layout_marginBottom="80dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/textView_blueVal" android:layout_marginEnd="8dp"/>
+            app:layout_constraintEnd_toStartOf="@+id/blueProgressText" android:layout_marginEnd="8dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView_redVal"
+            android:id="@+id/redProgressText"
             android:layout_marginBottom="240dp"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView_greenVal"
+            android:id="@+id/greenProgressText"
             android:layout_marginBottom="160dp"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView_blueVal"
+            android:id="@+id/blueProgressText"
             android:layout_marginBottom="80dp"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"/>
