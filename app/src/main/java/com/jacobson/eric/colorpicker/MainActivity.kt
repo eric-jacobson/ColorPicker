@@ -78,14 +78,14 @@ class MainActivity : AppCompatActivity() {
     private fun saveColor(){
         val file = openFileOutput("savedColorData.txt", Context.MODE_APPEND)
         val fileOut = OutputStreamWriter(file)
-        var color = EditText(this)
+        val color = EditText(this)
         val alert = AlertDialog.Builder(this@MainActivity).create()
         alert.setTitle("Save Color")
         alert.setView(color)
         alert.setButton(AlertDialog.BUTTON_POSITIVE, "Save", {
             dialogInterface, i ->
-            //var result = color.text.toString()
-            val data = "${rgbColors[0]} ${rgbColors[1]} ${rgbColors[2]}"
+            val colorName = color.text.toString()
+            val data = "$colorName ${rgbColors[0]} ${rgbColors[1]} ${rgbColors[2]}\n"
             fileOut.append(data)
             fileOut.close()
         })
@@ -116,9 +116,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun selectColorFromList(index: Int){
         val color = savedColors[index].split(" ")
-        val red:Int = color[0].toInt()
-        val green:Int = color[1].toInt()
-        val blue:Int = color[2].toInt()
+        val red:Int = color[1].toInt()
+        val green:Int = color[2].toInt()
+        val blue:Int = color[3].toInt()
         rgbColors[0] = red
         rgbColors[1] = green
         rgbColors[2] = blue
