@@ -1,6 +1,8 @@
 package com.jacobson.eric.colorpicker
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -8,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.Toast
@@ -20,17 +23,43 @@ import java.lang.Exception
 class MainActivity : AppCompatActivity() {
 
     var rgbColors:IntArray = intArrayOf(0, 0, 0)
-    var savedColors = arrayListOf<CharSequence>()
+    var rgbReturnColorsOne:IntArray = intArrayOf(0, 0, 0)
+    var rgbReturnColorsTwo:IntArray = intArrayOf(0, 0, 0)
+    private var savedColors = arrayListOf<CharSequence>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        val intentInfo = intent.extras
+
         seekBarProgress()
         setUpSeekBarChangeListener(redSeekBar, 0)
         setUpSeekBarChangeListener(greenSeekBar, 1)
         setUpSeekBarChangeListener(blueSeekBar, 2)
+
+        if(intentInfo != null){
+            colorOneButton.visibility = View.VISIBLE
+            colorTwoButton.visibility = View.VISIBLE
+            returnColorsButton.visibility = View.VISIBLE
+
+            colorOneButton.setOnClickListener {
+                rgbReturnColorsOne[0] = rgbColors[0]
+                rgbReturnColorsOne[1] = rgbColors[1]
+                rgbReturnColorsOne[2] = rgbColors[2]
+            }
+
+            colorTwoButton.setOnClickListener {
+                rgbReturnColorsTwo[0] = rgbColors[0]
+                rgbReturnColorsTwo[1] = rgbColors[1]
+                rgbReturnColorsTwo[2] = rgbColors[2]
+            }
+
+            returnColorsButton.setOnClickListener {
+                finish()
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -126,5 +155,13 @@ class MainActivity : AppCompatActivity() {
         greenSeekBar.progress = green
         blueSeekBar.progress = blue
         seekBarProgress()
+    }
+
+    override fun finish() {
+        val data = Intent()
+        data.putExtra("color_1", "${rgbReturnColorsOne[0]} ${rgbReturnColorsOne[1]} ${rgbReturnColorsOne[2]}")
+        data.putExtra("color_2", "${rgbReturnColorsTwo[0]} ${rgbReturnColorsTwo[1]} ${rgbReturnColorsTwo[2]}")
+        setResult(Activity.RESULT_OK, data)
+        super.finish()
     }
 }
