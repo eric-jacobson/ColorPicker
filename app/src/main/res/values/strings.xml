@@ -6,4 +6,7 @@
     <string name="label_red">Red</string>
     <string name="label_green">Green</string>
     <string name="label_blue">Blue</string>
+    <string name="color_one_button">Color 1</string>
+    <string name="color_two_button">Color 2</string>
+    <string name="return_colors_button">Return</string>
 </resources>
